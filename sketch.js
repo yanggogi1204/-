@@ -129,10 +129,16 @@ function draw() {
 		}
 	}
 
-	if (씬 == '회상' && catX != 500) {
+	if (씬 == '지나감' && catX != 500) {
 		fill(255, alpha);
-		text("push '→' key", 20, 20);
+		text("'→'키를 누르세요", 80, 25);
 	}
+
+	if (씬 == '다시') {
+		fill(255, alpha);
+		text("'←'키를 누르세요", 80, 25);
+	}
+
 
 	if (catX >= 495 && catX <= 505 && 쥐보임) {
 		textAlign(LEFT, TOP);
