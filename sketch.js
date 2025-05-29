@@ -1,9 +1,9 @@
 let img;
 let x = 0;
-let speed = 5;
+let speed = 6;
 let 왼쪽이동 = false;
 let 오른쪽이동 = true;
-
+let back = 0;
 //씬 = 시작 > 지나감 > 회상 > 다시 > 끝
 let 씬 = '시작';
 
@@ -46,7 +46,7 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	background(back);
 	image(bg1, x + 960, height / 2 - bg1.height / 2);
 	image(bg2, x + 2120, height / 2 - bg2.height / 2);
 	image(bg3, x + 3280, height / 2 - bg3.height / 2);
@@ -56,13 +56,17 @@ function draw() {
 	if (씬 === "시작") {
 		textSize(20);
 		fill(255, alpha);
-    textAlign(LEFT, TOP);
+    	textAlign(LEFT, TOP);
 		text("스페이스 키를 눌러 시작", 20, 20);
 
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(30);
-    text("진정한 행복이란 무엇인가가", width / 2, height / 2 - 50);
+    textSize(50);
+    text("행복을 잡아라", width / 2, height / 2 - 50);
+	
+	textSize(20);
+	textAlign(CENTER, CENTER);
+	text("양지원, 김상완, 최의진", 120, 570);
 
 	}
 
@@ -97,7 +101,7 @@ function draw() {
 	  if (왼쪽이동 == true) {
 	  	if (keyIsDown(LEFT_ARROW)) {
 	  		x += speed;
-	  		image(뒤로걷기[고양이걸음프레임], catX, 480);
+	  		image(뒤로걷기[고양이걸음프레임], catX, 500);
 	  		if (frameCount % 15 === 0) {
 	  			고양이걸음프레임 = (고양이걸음프레임 + 1) % 뒤로걷기.length;
 	  		}
@@ -107,7 +111,7 @@ function draw() {
     }
 	}
 
-	x = constrain(x, -4500, 100);
+	x = constrain(x, -4500, 200);
 	catX = constrain(catX, 200, 500);
 	ratX = constrain(ratX, 200, 710);
 
@@ -131,23 +135,27 @@ function draw() {
 	}
 
 	if (catX >= 495 && catX <= 505 && 쥐보임) {
-	
+		textAlign(LEFT, TOP);
 		text("쥐를 클릭하세요", 20, 6);
 	}
 
-  if (씬 =='다시' && x >= 100) {
+  if (씬 =='다시' && x >= 200) {
     {
       씬 = '끝';
     }
   }
 
   if (씬 == '끝') {
-    fill(255);
-    textAlign(CENTER, CENTER);
-    textSize(30);
-    text("양지원, 김상완, 최의진", width / 2, height / 2 - 50);
-  }
+    fill(0);
+	back += 5;
 
+	if (back > 255) {
+    	textAlign(CENTER, CENTER);
+    	textSize(50);
+		text("The End", width / 2, height / 2);
+	}
+    
+  }
 
 }
 
@@ -158,16 +166,10 @@ function mousePressed() {
 			쥐보임 = false;
 			왼쪽이동 = true;
 			오른쪽이동 = false;
-      씬 = '다시';
+        	씬 = '다시';
 
 		}
 	}
-
-	if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-	let fs = fullscreen();
-    fullscreen(!fs);
-	}
-
 
 }
 
