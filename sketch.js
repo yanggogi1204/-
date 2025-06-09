@@ -5,7 +5,7 @@ let 왼쪽이동 = false;
 let 오른쪽이동 = true;
 let back = 0;
 //씬 = 시작 > 인트로 > 인트로2 > 인트로3 > 지나감 > 회상 > 다시 > 끝 > 크레딧딧
-let 씬 = '크레딧';
+let 씬 = '시작';
 
 let 카운트 = 0;   
 let ratMove = 3;
