@@ -5,7 +5,7 @@ let 왼쪽이동 = false;
 let 오른쪽이동 = true;
 let back = 0;
 //씬 = 시작 > 인트로 > 인트로2 > 인트로3 > 지나감 > 회상 > 다시 > 끝 > 크레딧딧
-let 씬 = '시작';
+let 씬 = '크레딧';
 
 let 카운트 = 0;   
 let ratMove = 3;
@@ -38,6 +38,10 @@ let 하얀화면_사랑 = 0;
 let 하얀화면_자유 = 0;
 
 let 돌아가 = 0;
+
+
+
+
 
 let catX = 200;
 let 고양이걷기 = [];
@@ -85,6 +89,12 @@ function preload() {
 
 	introRatB.push(loadImage("lat/인트로쥐back1.png"));
 	introRatB.push(loadImage("lat/인트로쥐back2.png"));
+
+
+	
+	김상완 = loadImage("자료/김상완소감.png");
+	최의진 = loadImage("자료/최의진소감.png");
+	양지원 = loadImage("자료/양지원소감.png");
 
 	
 
@@ -550,18 +560,84 @@ function draw() {
   	}
 
 
+
+
+
 	if (씬 == '끝') {
     	fill(0);
 		
-		back += 5;
+		back += 4;
 
 		if (back > 255) {
  	  	 	textAlign(CENTER, CENTER);
    		 	textSize(50);
 			text("The End", width / 2, height / 2);
 		}
+		if (back > 400) {
+			씬 = '크레딧';
+		}
+		
   	}
 
+	if (씬 == '크레딧') {
+
+
+		back -= 4;
+
+		if (back < 0) {
+
+			fill(250);
+
+			textSize(60);
+			text("credit >> ", x+200 , height / 2);
+
+			catX = 200;
+
+
+			textSize(30);
+			text('[제작]', x+900, 150);
+			text('양지원', x+900, 210);
+			text('김상완', x+900, 260);
+			text('최의진', x+900, 310);
+
+			textSize(20);
+			text('배경 그림은 AI의 도움을 받아 제작하였습니다', x + 1300, 350);
+			text('[코드 ai 사용 비율]', x+1400, 210);
+			text('AI : 5%', x+1400, 260);
+			text('sound, map, image, frameCount 등 함수', x+1360, 300);
+
+			image(김상완, x+1900, 100);
+			image(최의진, x+2700, 10);
+			image(양지원, x+3600, 10);
+
+			if (keyIsDown(LEFT_ARROW)) {
+				x += 10;
+				
+
+				image(뒤로걷기[고양이걸음프레임], catX, 500);
+				if (frameCount % 15 === 0) {
+					고양이걸음프레임 = (고양이걸음프레임 + 1) % 뒤로걷기.length;
+				}
+			}
+			else if (keyIsDown(RIGHT_ARROW)) {
+				x -= 10;
+				
+				if (frameCount % 15 === 0) {
+					고양이걸음프레임 = (고양이걸음프레임 + 1) % 고양이걷기.length;
+					
+				}
+			image(고양이걷기[고양이걸음프레임], catX, 500);
+
+			}
+			else {
+				image(catSitImg, catX, 480);
+			}
+		}
+	}
+
+
+
+	
 }
 
 
